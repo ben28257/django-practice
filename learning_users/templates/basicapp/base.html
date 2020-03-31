@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="{% static "bootstrap/css/bootstrap.min.css" %}">
+	<link rel="stylesheet" href="{% static "css/mystyles.css" %}">
+	{% if title %}
+		<title>{{ title }}</title>
+	{% else %}
+		<title>DGDP</title>
+	{% endif %}
+	
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-static-top">
+		<div class="container">
+			<ul class="nav navbar-nav">
+				<li><a class="navbar-brand" href="{% url 'index' %}">DGDP</a></li>
+				<li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
+				<li><a class="navbar-link" href="{% url 'basicapp:register' %}">Register</a></li>
+				{% if user.is_authenticated %}
+					<li><a class="navbar-link" href="{% url 'logout' %}">Logout</a></li>
+					{# <li><a class="navbar-link" href="{% url 'logout' %}"></a>Logout</li> #}
+				{% else %}
+					<li><a class="navbar-link" href="{% url 'basicapp:user_login' %}">Login</a></li>
+				{% endif %}
+			</ul>
+		</div>
+	</nav>
+	<div class="container">
+		{% block content %}{% endblock content %}
+	</div>
+</body>
+</html>
